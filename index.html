@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" manifest="/cache.appcache" data-bs-theme="dark">
+
+<head>
+    <title>
+        <Syed Muzakkir />
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid" id="container">
+        <div class="row">
+            <div class="col-md-3" id="leftcontent">
+                <nav id="navigation" class="navbar flex-column align-items-stretch p-3 mt-5 ms-5">
+                    <div class="navbar-brand mb-0"> Syed Muzakkir </div>
+                    <div class="lead pt-1">Software Designer and Developer</div>
+                    <p class="text-muted pt-3">
+                        I build software products and digital experiences for the web.
+                    </p>
+                    <nav class="nav nav-pills flex-column">
+                        <a class="nav-link" href="#about">ABOUT</a>
+                        <a class="nav-link" href="#experience">EXPERIENCE</a>
+                        <a class="nav-link" href="#projects">PROJECTS</a>
+                    </nav>
+                    <div class="row">
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item border-0">
+                                <a href="" target="_blank" class="portfolio-contact">
+                                    <iconify-icon icon="feather:instagram" height="2em" width="2em"></iconify-icon>
+                                </a>
+                            </li>
+                            <li class="list-group-item border-0">
+                                <a href="" target="_blank" class="portfolio-contact">
+                                    <iconify-icon icon="bi:github" height="2em" width="2em"></iconify-icon>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-md-9" id="rightcontent" data-bs-spy="scroll" data-bs-target="#navigation" data-bs-offset="0"
+                data-bs-smooth-scroll="true" tabindex="0">
+                <div>
+                    <section id="about" class="pt-4">About
+                    </section>
+                    <section id="experience" class="pt-4">Experience
+                    </section>
+                    <section id="projects" class="pt-4 pb-5">Projects
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/iconify-icon.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $('#about').load('about.html');
+                $('#experience').load('experience.html');
+                $('#projects').load('projects.html');
+            });
+        });
+    </script>
+</body>
+
+</html>

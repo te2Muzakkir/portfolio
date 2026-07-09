@@ -1,0 +1,74 @@
+html, body {
+    height: 100%;
+}
+
+.container-fluid {
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.navbar-brand {
+    font-size: 29px !important;
+    color: #432874;
+}
+
+#rightcontent {
+    overflow-y: scroll;
+    max-height: 100vh;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #432874 !important;
+    color: #ffffff !important;
+}
+
+a.nav-link {
+    color : #000000  !important; 
+}
+
+.list-group > .list-group-item {
+    padding-right: 0px;
+}
+
+.protfolio-hl-bc {
+    background-color: #432874 !important;
+}
+
+.protfolio-hl-fc {
+    color: #ffffff !important;
+}
+
+.portfolio-contact {
+    color: #432874;
+ }
+
+ .portfolio-contact:hover {
+    color: #000000;
+ }
+
+.card-img-top {
+    height: 15vw;
+    object-fit: fill;
+}
+
+.portfolio-scroll { 
+    height: 250px; 
+    overflow-y: auto; 
+    width: 100%; 
+    word-break: break-word;
+}
+
+.badge {
+    font-weight: normal !important;
+}
+
+::selection, ::-moz-selection {
+    color: #ffffff;
+    background: #432874;
+}
+
+@media (max-width: 750px) { 
+    .nav{
+        display: none;
+    }
+}
