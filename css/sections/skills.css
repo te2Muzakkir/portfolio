@@ -1,0 +1,78 @@
+/* ==========================================================
+         SKILLS MARQUEE BELT
+         ========================================================== */
+      .skills-marquee-section {
+        background: var(--color-skills-bg);
+        padding: 10px 0 0;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        display: none;
+      }
+
+      .marquee-label {
+        text-align: center;
+        font-family: var(--font-editorial);
+        font-style: italic;
+        font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+        color: var(--color-white);
+        margin-bottom: 36px;
+        opacity: 0.9;
+      }
+
+      .marquee-track {
+        display: flex;
+        overflow: hidden;
+        white-space: nowrap;
+        margin-bottom: 18px;
+        mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      }
+
+      .marquee-inner {
+        display: flex;
+        gap: 0;
+        will-change: transform;
+      }
+
+      .marquee-inner.row-left {
+        animation: scrollLeft 40s linear infinite;
+      }
+
+      .marquee-inner.row-right {
+        animation: scrollRight 44s linear infinite;
+      }
+
+      @keyframes scrollLeft {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+      }
+
+      @keyframes scrollRight {
+        from { transform: translateX(-50%); }
+        to   { transform: translateX(0); }
+      }
+
+      .marquee-track:hover .marquee-inner {
+        animation-play-state: paused;
+      }
+
+      .skill-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-main);
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: var(--color-white);
+        padding: 0 28px;
+        white-space: nowrap;
+      }
+
+      .chip-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        flex-shrink: 0;
+      }

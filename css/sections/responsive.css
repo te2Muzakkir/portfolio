@@ -1,0 +1,104 @@
+/* Projects responsive */
+      @media (max-width: 860px) {
+        .project-card {
+          grid-template-columns: 1fr;
+        }
+
+        .project-img-panel {
+          min-height: 220px;
+        }
+
+        .project-info-panel {
+          padding: 28px 24px;
+        }
+      }
+
+      /* ==========================================================
+         RESPONSIVE BREAKPOINTS
+         ========================================================== */
+      @media (max-width: 1024px) {
+        .nav-menu {
+          display: none;
+        }
+
+        .hamburger-btn {
+          display: flex;
+        }
+
+        .hero-container {
+          grid-template-columns: 1fr;
+          gap: 48px;
+          text-align: center;
+        }
+
+        .hero-content {
+          align-items: center;
+        }
+
+        .hero-desc {
+          margin: 0 auto;
+        }
+
+        .hero-actions {
+          justify-content: center;
+        }
+
+        .hero-specs-row {
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .hero-parallax-stage {
+          height: 440px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav-container {
+          padding: 0 20px;
+        }
+
+        .hero-section {
+          padding: calc(var(--nav-height) + 30px) 20px 60px;
+        }
+
+        .hero-title {
+          font-size: 2.8rem;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .btn-primary, .btn-secondary {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .hero-parallax-stage {
+          height: 380px;
+        }
+
+        .layer-main-card {
+          inset: 8% 4%;
+          padding: 24px;
+        }
+
+        .card-logo-img {
+          width: 72px;
+          height: 72px;
+        }
+
+        .node-1, .node-2, .node-3 {
+          padding: 6px 12px;
+          font-size: 0.7rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .project-card {
+          opacity: 1;
+          transform: none;
+        }
+      }

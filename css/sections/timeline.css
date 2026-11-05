@@ -1,0 +1,460 @@
+/* =========================================
+   TIMELINE SECTION
+========================================= */
+
+#timeline {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 110px 6%;
+  overflow: clip;
+  background: var(--color-white);
+}
+
+.timeline-shell {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.timeline-heading {
+  max-width: 700px;
+  margin-bottom: 75px;
+  text-align: left;
+}
+
+.timeline-heading .section-headline {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+/* =========================================
+   TIMELINE LAYOUT
+========================================= */
+
+.timeline-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: 75px;
+}
+
+/* =========================================
+   3D ORB CONTAINER
+========================================= */
+
+.timeline-visual-wrap {
+  position: sticky;
+  top: 15vh;
+  height: 560px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-visual {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Ambient glow */
+
+.timeline-visual::before {
+  content: "";
+
+  position: absolute;
+  width: 75%;
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(116, 77, 180, 0.17) 0%,
+    rgba(116, 77, 180, 0.07) 45%,
+    transparent 72%
+  );
+
+  filter: blur(25px);
+
+  z-index: -1;
+}
+
+/* =========================================
+   THREE.JS RENDERERS
+========================================= */
+
+#timeline .orb-webgl,
+#timeline .orb-css3d {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+#timeline .orb-webgl {
+  z-index: 1;
+
+  display: block;
+  pointer-events: none;
+  outline: none;
+}
+
+#timeline .orb-css3d {
+  z-index: 2;
+
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* =========================================
+   ORB LOADING INDICATOR
+========================================= */
+
+.orb-loading {
+  position: absolute;
+  z-index: 3;
+
+  color: #765a9e;
+
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+
+  pointer-events: none;
+
+  transition: opacity 0.5s ease;
+}
+
+.orb-loading.is-hidden {
+  opacity: 0;
+}
+
+/* =========================================
+   ORB CAPTION
+========================================= */
+
+.orb-caption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-top: -10px;
+
+  color: #786b8d;
+
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.orb-caption-line {
+  width: 28px;
+  height: 1px;
+
+  background: #7652a6;
+}
+
+/* =========================================
+   3D TECHNOLOGY LABELS
+========================================= */
+
+#timeline .orb-skill-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 7px 11px;
+
+  color: #eee4ff;
+  background: rgba(43, 24, 73, 0.82);
+
+  border: 1px solid rgba(194, 159, 255, 0.55);
+  border-radius: 5px;
+
+  box-shadow:
+    0 0 12px rgba(126, 80, 190, 0.25),
+    inset 0 0 10px rgba(178, 138, 255, 0.08);
+
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+
+  white-space: nowrap;
+  user-select: none;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+}
+
+/* =========================================
+   CAREER CONTENT
+========================================= */
+
+.timeline-content {
+  position: relative;
+  padding-left: 35px;
+}
+
+/* Progress indicator */
+
+.timeline-progress {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+
+  width: 2px;
+}
+
+.timeline-progress-track {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(67, 40, 116, 0.12);
+}
+
+.timeline-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 0%;
+
+  background: #7652a6;
+
+  transition: height 0.6s ease;
+}
+
+/* Timeline steps */
+
+.timeline-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+.timeline-step {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 18px;
+
+  opacity: 0.42;
+
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+.timeline-step.is-active {
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+/* Step number */
+
+.timeline-step-number {
+  position: relative;
+  z-index: 2;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(67, 40, 116, 0.25);
+  border-radius: 50%;
+
+  background: #f3f0fa;
+  color: #7652a6;
+
+  font-family: var(--font-mono);
+  font-size: 11px;
+
+  transition: all 0.4s ease;
+}
+
+.timeline-step.is-active .timeline-step-number {
+  color: #fff;
+  background: #432874;
+  border-color: #432874;
+
+  box-shadow: 0 0 0 6px rgba(67, 40, 116, 0.09);
+}
+
+/* Period */
+
+.timeline-period {
+  display: block;
+  margin-bottom: 10px;
+
+  color: #8269a4;
+
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+/* Job title */
+
+.timeline-step h3 {
+  margin: 0 0 5px;
+
+  color: #2c1b46;
+
+  font-family: var(--font-editorial);
+  font-size: clamp(23px, 2.2vw, 31px);
+  font-weight: 500;
+}
+
+/* Company */
+
+.timeline-step h4 {
+  margin: 0 0 12px;
+
+  color: #7652a6;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Description */
+
+.timeline-step p {
+  max-width: 420px;
+  margin: 0;
+
+  color: #756b82;
+
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* Category */
+
+.timeline-step-category {
+  display: inline-block;
+  margin-top: 14px;
+
+  color: #9a8bac;
+
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1.3px;
+}
+
+/* =========================================
+   TABLET RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+  #timeline {
+    padding: 90px 5%;
+  }
+
+  .timeline-heading {
+    margin-bottom: 35px;
+  }
+
+  .timeline-layout {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .timeline-visual-wrap {
+    position: relative;
+    top: auto;
+
+    height: 400px;
+
+    grid-row: 1;
+  }
+
+  .timeline-content {
+    grid-row: 2;
+  }
+
+  .timeline-steps {
+    gap: 35px;
+  }
+
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+  #timeline {
+    padding: 75px 22px;
+  }
+
+  .timeline-visual-wrap {
+    height: 320px;
+  }
+
+  .timeline-visual {
+    min-height: 300px;
+  }
+
+  .timeline-content {
+    padding-left: 25px;
+  }
+
+  .timeline-step {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 13px;
+  }
+
+  .timeline-step-number {
+    width: 30px;
+    height: 30px;
+
+    font-size: 10px;
+  }
+
+  .timeline-step h3 {
+    font-size: 24px;
+  }
+
+  .timeline-step p {
+    font-size: 12px;
+  }
+
+  .timeline-steps {
+    gap: 32px;
+  }
+
+  /* Technology labels */
+
+  #timeline .orb-skill-label {
+    padding: 5px 7px;
+
+    font-size: 8px;
+    letter-spacing: 0.5px;
+  }
+
+}

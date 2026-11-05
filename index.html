@@ -1,72 +1,351 @@
 <!DOCTYPE html>
-<html lang="en" manifest="/cache.appcache" data-bs-theme="dark">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>That Muzakkir Labs</title>
+    <link rel="icon" type="image/x-icon" href="public/images/title-icon.ico" />
 
-<head>
-    <title>
-        <Syed Muzakkir />
-    </title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/custom.css" rel="stylesheet">
-</head>
+    <!-- GSAP via Standalone CDN (Vanilla JS, Zero npm/vite) -->
+    <script src="./scripts/gsap.min.js"></script>
 
-<body>
-    <div class="container-fluid" id="container">
-        <div class="row">
-            <div class="col-md-3" id="leftcontent">
-                <nav id="navigation" class="navbar flex-column align-items-stretch p-3 mt-5 ms-5">
-                    <div class="navbar-brand mb-0"> Syed Muzakkir </div>
-                    <div class="lead pt-1">Software Designer and Developer</div>
-                    <p class="text-muted pt-3">
-                        I build software products and digital experiences for the web.
-                    </p>
-                    <nav class="nav nav-pills flex-column">
-                        <a class="nav-link" href="#about">ABOUT</a>
-                        <a class="nav-link" href="#experience">EXPERIENCE</a>
-                        <a class="nav-link" href="#projects">PROJECTS</a>
-                    </nav>
-                    <div class="row">
-                        <ul class="list-group list-group-horizontal">
-                            <li class="list-group-item border-0">
-                                <a href="" target="_blank" class="portfolio-contact">
-                                    <iconify-icon icon="feather:instagram" height="2em" width="2em"></iconify-icon>
-                                </a>
-                            </li>
-                            <li class="list-group-item border-0">
-                                <a href="" target="_blank" class="portfolio-contact">
-                                    <iconify-icon icon="bi:github" height="2em" width="2em"></iconify-icon>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-            <div class="col-md-9" id="rightcontent" data-bs-spy="scroll" data-bs-target="#navigation" data-bs-offset="0"
-                data-bs-smooth-scroll="true" tabindex="0">
-                <div>
-                    <section id="about" class="pt-4">About
-                    </section>
-                    <section id="experience" class="pt-4">Experience
-                    </section>
-                    <section id="projects" class="pt-4 pb-5">Projects
-                    </section>
-                </div>
-            </div>
+    <style>
+      /* ==========================================================
+         LOCAL FONTS (public/fonts/)
+         ========================================================== */
+      @font-face {
+        font-family: 'Onest';
+        src: url('public/fonts/Onest-VariableFont_wght.ttf') format('truetype-variations'),
+             url('public/fonts/Onest-VariableFont_wght.ttf') format('truetype');
+        font-weight: 100 900;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'EB Garamond';
+        src: url('public/fonts/EBGaramond-VariableFont_wght.ttf') format('truetype-variations'),
+             url('public/fonts/EBGaramond-VariableFont_wght.ttf') format('truetype');
+        font-weight: 400 800;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'EB Garamond';
+        src: url('public/fonts/EBGaramond-Italic-VariableFont_wght.ttf') format('truetype-variations'),
+             url('public/fonts/EBGaramond-Italic-VariableFont_wght.ttf') format('truetype');
+        font-weight: 400 800;
+        font-style: italic;
+        font-display: swap;
+      }
+
+      /* ==========================================================
+         STRICT 5-COLOR PALETTE:
+         #432874 - ACCENT
+         #f3f0fa - BACKGROUND
+         #53417d - MAIN
+         #FFFFFF - WHITE
+         #000000 - BLACK
+         ========================================================== */
+      :root {
+        --color-accent: #432874;
+        --color-bg: #f3f0fa;
+        --color-main: #53417d;
+        --color-white: #ffffff;
+        --color-black: #000000;
+
+        --font-main: 'Onest', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        --font-editorial: 'EB Garamond', Georgia, serif;
+        --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      }
+
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html, body {
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-white);
+        color: var(--color-main);
+        font-family: var(--font-main);
+        overflow: hidden;
+        user-select: none;
+      }
+
+      /* Subtle Laboratory Blueprint Grid */
+      .ambient-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(to right, rgba(83, 65, 125, 0.04) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(83, 65, 125, 0.04) 1px, transparent 1px);
+        background-size: 48px 48px;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* Centered Stage */
+      .loading-stage {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        padding: 20px;
+      }
+
+      /* SVG Liquid Text Container */
+      .liquid-svg-wrap {
+        width: 100%;
+        max-width: 860px;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .liquid-text-svg {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+
+      /* Border / Outline of MuzakkirLabs */
+      .text-outline {
+        font-family: var(--font-editorial);
+        font-size: 112px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        text-anchor: middle;
+        fill: none;
+        stroke: var(--color-accent);
+        stroke-width: 2.8px;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+      }
+
+      /* Liquid Fill of MuzakkirLabs */
+      .text-fill {
+        font-family: var(--font-editorial);
+        font-size: 112px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        text-anchor: middle;
+        fill: var(--color-accent);
+        stroke: var(--color-accent);
+        stroke-width: 1px;
+      }
+
+      /* Progress Indicator under the text */
+      .loading-meta {
+        margin-top: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .progress-track {
+        width: 180px;
+        height: 4px;
+        background: rgba(83, 65, 125, 0.14);
+        border-radius: 9999px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        width: 0%;
+        height: 100%;
+        background: var(--color-accent);
+        border-radius: 9999px;
+      }
+
+      .progress-counter {
+        font-family: var(--font-mono);
+        font-size: 0.88rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: var(--color-accent);
+      }
+
+      /* Skip to home action */
+      .skip-action {
+        position: absolute;
+        bottom: 32px;
+        z-index: 10;
+      }
+
+      .skip-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 18px;
+        background: var(--color-white);
+        border: 1px solid var(--color-accent);
+        border-radius: 9999px;
+        font-family: var(--font-main);
+        font-size: 0.76rem;
+        font-weight: 600;
+        color: var(--color-accent);
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        box-shadow: 0 4px 14px rgba(67, 40, 116, 0.08);
+      }
+
+      .skip-btn:hover {
+        background: var(--color-accent);
+        color: var(--color-white);
+        box-shadow: 0 6px 18px rgba(67, 40, 116, 0.25);
+        transform: translateY(-1px);
+      }
+
+      /* Smooth Transition Curtain Overlay */
+      .transition-curtain {
+        position: fixed;
+        inset: 0;
+        background: var(--color-bg);
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background Blueprint Grid -->
+    <div class="ambient-grid"></div>
+
+    <!-- Transition Overlay -->
+    <div class="transition-curtain" id="transition-curtain"></div>
+
+    <!-- Centered Stage -->
+    <main class="loading-stage">
+      <div class="liquid-svg-wrap">
+        <svg class="liquid-text-svg" viewBox="0 0 900 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- Liquid wave clipping mask -->
+            <clipPath id="liquid-clip">
+              <!-- Animated liquid wave path that rises from bottom to top -->
+              <path id="wave-path" d="M -300 220 Q -150 205 0 220 T 300 220 T 600 220 T 900 220 T 1200 220 V 300 H -300 Z" />
+            </clipPath>
+          </defs>
+
+          <!-- 1. Text Border / Outline with ACCENT color (#432874) -->
+          <text x="450" y="142" class="text-outline">MuzakkirLabs</text>
+
+          <!-- 2. Text Fill with ACCENT color (#432874) clipped by rising liquid wave -->
+          <g clip-path="url(#liquid-clip)">
+            <text x="450" y="142" class="text-fill">MuzakkirLabs</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Minimal Progress Indicator -->
+      <div class="loading-meta">
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill"></div>
         </div>
-    </div>
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/iconify-icon.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $(function () {
-                $('#about').load('about.html');
-                $('#experience').load('experience.html');
-                $('#projects').load('projects.html');
-            });
-        });
-    </script>
-</body>
+        <div class="progress-counter" id="progress-val">00%</div>
+      </div>
 
+      <!-- Skip Button -->
+      <div class="skip-action">
+        <button id="skip-btn" class="skip-btn">
+          <span>SKIP TO HOME</span>
+          <span>▹</span>
+        </button>
+      </div>
+    </main>
+
+    <!-- Vanilla JS Animation & Transition -->
+    <script>
+      (function() {
+        const DURATION_SECONDS = 2.0;
+
+        const wavePath = document.getElementById('wave-path');
+        const progressVal = document.getElementById('progress-val');
+        const progressFill = document.getElementById('progress-fill');
+        const skipBtn = document.getElementById('skip-btn');
+        const transitionCurtain = document.getElementById('transition-curtain');
+
+        let isNavigating = false;
+
+        function navigateToHome() {
+          if (isNavigating) return;
+          isNavigating = true;
+
+          gsap.to(transitionCurtain, {
+            opacity: 1,
+            duration: 0.45,
+            ease: 'power2.inOut',
+            onComplete: function() {
+              window.location.href = 'home.html';
+            }
+          });
+        }
+
+        skipBtn.addEventListener('click', navigateToHome);
+
+        // Wave liquid horizontal oscillation (flow)
+        let waveX = 0;
+        let waveY = 220; // Starts below baseline (220) and rises to 0 (top of text)
+
+        function updateWavePath() {
+          const amp = 8; // wave ripple amplitude
+          const y = waveY;
+          const x = waveX;
+
+          wavePath.setAttribute(
+            'd',
+            `M ${-300 + x} ${y} ` +
+            `Q ${-150 + x} ${y - amp} ${0 + x} ${y} ` +
+            `T ${300 + x} ${y} ` +
+            `T ${600 + x} ${y} ` +
+            `T ${900 + x} ${y} ` +
+            `T ${1200 + x} ${y} ` +
+            `V 300 H ${-300 + x} Z`
+          );
+        }
+
+        // Horizontal liquid ripple tween
+        gsap.to({ x: 0 }, {
+          x: 300,
+          duration: 1.0,
+          repeat: -1,
+          ease: 'none',
+          onUpdate: function() {
+            waveX = this.targets()[0].x;
+            updateWavePath();
+          }
+        });
+
+        // Vertical liquid rising tween (from y=220 down to y=10 to submerge the text fully)
+        const progressObj = { percent: 0, level: 220 };
+
+        gsap.to(progressObj, {
+          percent: 100,
+          level: 15,
+          duration: DURATION_SECONDS,
+          ease: 'power1.inOut',
+          onUpdate: function() {
+            const current = Math.round(progressObj.percent);
+            progressVal.textContent = (current < 10 ? '0' + current : current) + '%';
+            progressFill.style.width = current + '%';
+
+            waveY = progressObj.level;
+            updateWavePath();
+          },
+          onComplete: function() {
+            setTimeout(navigateToHome, 200);
+          }
+        });
+      })();
+    </script>
+  </body>
 </html>

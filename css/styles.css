@@ -1,0 +1,10 @@
+/* Main stylesheet — import order is intentional. */
+@import url('./sections/base.css');
+@import url('./sections/navbar.css');
+@import url('./sections/hero.css');
+@import url('./sections/projects.css');
+@import url('./sections/skills.css');
+@import url('./sections/shared-sections.css');
+@import url('./sections/timeline.css');
+@import url('./sections/responsive.css');
+@import url('./sections/contact.css');
